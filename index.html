@@ -88,8 +88,23 @@
                 // Salva no localStorage (backup)
                 localStorage.setItem('facebook_utms', JSON.stringify(utms));
                 
-                // TODO: Aqui você enviará para seu backend na próxima etapa
-                console.log('UTMs salvos localmente');
+                                // NOVO: Envia UTMs para o backend
+                const backendUrl = 'https://4329-45-174-82-157.ngrok-free.app/api/save-utms';
+
+                fetch(backendUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(utms)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('✅ UTMs enviados para backend:', data);
+                })
+                .catch(error => {
+                    console.error('❌ Erro ao enviar UTMs:', error);
+                });
 
             } catch (error) {
                 console.error('Erro ao capturar UTMs:', error);
@@ -103,7 +118,7 @@
         setTimeout(() => {
             console.log('Redirecionando para Telegram...');
             window.location.href = 'https://t.me/Marysafadinabot';
-        }, 322000); // 3 segundos ao invés de 6 horas!
+        }, 30000); // 3 segundos ao invés de 6 horas!
     </script>
 </body>
 </html>
