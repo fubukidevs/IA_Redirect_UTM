@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
+    <!-- UTMify Pixel - MANTÉM IGUAL -->
     <script>
     window.pixelId = "680e2bf0b553fd1ab4f90c30";
     var a = document.createElement("script");
@@ -11,6 +11,7 @@
     document.head.appendChild(a);
     </script>
 
+    <!-- UTMify UTMs Script - MANTÉM IGUAL -->
     <script
     src="https://cdn.utmify.com.br/scripts/utms/latest.js"
     data-utmify-prevent-xcod-sck
@@ -22,22 +23,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionando...</title>
-    <meta http-equiv="refresh" content="1;url=https://t.me/Marysafadinabot">
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .loading {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="spinner"></div>
+        <div class="loading">Redirecionando...</div>
+    </div>
+
     <script>
-        // Delay de 200ms para dar tempo do tracker UTMfy enviar os dados
+        function capturarUTMs() {
+            try {
+                // Captura UTMs da URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const utms = {
+                    utm_source: urlParams.get('utm_source'),
+                    utm_campaign: urlParams.get('utm_campaign'), 
+                    utm_medium: urlParams.get('utm_medium'),
+                    utm_content: urlParams.get('utm_content'),
+                    utm_term: urlParams.get('utm_term'),
+                    timestamp: new Date().toISOString(),
+                    url: window.location.href,
+                    referrer: document.referrer
+                };
+
+                console.log('UTMs capturados:', utms);
+
+                // Salva no localStorage (backup)
+                localStorage.setItem('facebook_utms', JSON.stringify(utms));
+                
+                // TODO: Aqui você enviará para seu backend na próxima etapa
+                console.log('UTMs salvos localmente');
+
+            } catch (error) {
+                console.error('Erro ao capturar UTMs:', error);
+            }
+        }
+
+        // Executa imediatamente
+        capturarUTMs();
+
+        // CORRIGIDO: Aguarda apenas 3 segundos 
         setTimeout(() => {
+            console.log('Redirecionando para Telegram...');
             window.location.href = 'https://t.me/Marysafadinabot';
-        }, 222222222222222222222222222222222222222200);
+        }, 3000); // 3 segundos ao invés de 6 horas!
     </script>
 </body>
 </html>
