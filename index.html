@@ -22,7 +22,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecionando...</title>
+    <title>KKKKKKKKK</title>
     <style>
         body {
             margin: 0;
@@ -89,12 +89,13 @@
                 localStorage.setItem('facebook_utms', JSON.stringify(utms));
                 
                                 // NOVO: Envia UTMs para o backend
-                const backendUrl = 'https://4329-45-174-82-157.ngrok-free.app/api/save-utms';
+                const backendUrl = 'https://818a-45-174-82-157.ngrok-free.app/api/save-utms';
 
-                fetch(backendUrl, {
+                    fetch(backendUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'ngrok-skip-browser-warning': 'true'
                     },
                     body: JSON.stringify(utms)
                 })
